@@ -1,13 +1,22 @@
 terraform {
-  required_version = ">= 0.12.26"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.16"
+    }
+  }
+  required_version = ">= 1.2.0"
 }
 
-variable "subject" {
-   type = string
-   default = "tfctl-rc"
-   description = "Subject to hello"
+provider "aws" {
+  region  = "us-east-1"
 }
 
-output "hello_world" {
-  value = "hey hey ya, ${var.subject}!"
+resource "aws_instance" "app_server" {
+  ami           = "ami-830c94e3"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "ExampleAppServerInstance"
+  }
 }
