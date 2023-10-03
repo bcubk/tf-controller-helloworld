@@ -23,5 +23,5 @@ spec:
   runnerPodTemplate:
     spec:
       envFrom:
-        - secretRef:
-            name: aws-credentials
+      - secretRef:
+          name: aws-credentials
